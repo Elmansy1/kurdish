@@ -1,6 +1,6 @@
 (function() {
     // قائمة النطاقات المسموحة
-    const allowedDomains = ["shaqla7gang.blogspot.com", "orcamanga.site"];
+    const allowedDomains = ["kurdish-manhwa.blogspot.com", "orcamanga.site", "blogger.com"];
     
     // جلب النطاق الحالي بدون www
     const currentDomain = window.location.hostname.replace(/^www\./i, '');
