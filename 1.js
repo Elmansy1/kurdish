@@ -1,6 +1,6 @@
 (function() {
     // قائمة النطاقات المسموحة
-    const allowedDomains = ["shaqla7gang.blogspot.com", "orcamanga.site"];
+    const allowedDomains = ["https://kurdish-manhwa.blogspot.com/", "orcamanga.site", "blogger.com"];
     
     // جلب النطاق الحالي بدون www
     const currentDomain = window.location.hostname.replace(/^www\./i, '');
@@ -162,4 +162,64 @@
             });
     }
 })();
-//]]>
+  const genreMap = {
+    &quot;Action&quot;: &quot;ئەكشن&quot;, &quot;Adventure&quot;: &quot;سەرکێشی&quot;, &quot;Cars&quot;: &quot;ئۆتۆمبێل&quot;, &quot;Comedy&quot;: &quot;كۆمیدی&quot;,
+    &quot;Dementia&quot;: &quot;بیرچوونەوە&quot;, &quot;Demons&quot;: &quot;شەیتانەکان&quot;, &quot;Drama&quot;: &quot;دراما&quot;, &quot;Ecchi&quot;: &quot;ئیچی&quot;,
+    &quot;Fantasy&quot;: &quot;فانتازیا&quot;, &quot;Game&quot;: &quot;یاری&quot;, &quot;Harem&quot;: &quot;هاریم&quot;, &quot;Historical&quot;: &quot;مێژوویی&quot;,
+    &quot;Horror&quot;: &quot;ترسناک&quot;, &quot;Josei&quot;: &quot;جۆسەی&quot;, &quot;Kids&quot;: &quot;منداڵان&quot;, &quot;Magic&quot;: &quot;سیحر&quot;,
+    &quot;Martial Arts&quot;: &quot;هونەری شەڕ&quot;, &quot;Mecha&quot;: &quot;مێكا&quot;, &quot;Military&quot;: &quot;سەربازی&quot;, &quot;Music&quot;: &quot;میوزیک&quot;,
+    &quot;Mystery&quot;: &quot;نهێنی&quot;, &quot;Parody&quot;: &quot;پەڕۆدی&quot;, &quot;Police&quot;: &quot;پۆلیس&quot;, &quot;Psychological&quot;: &quot;دەروونی&quot;,
+    &quot;Romance&quot;: &quot;عاشقانه&quot;, &quot;Samurai&quot;: &quot;سامورای&quot;, &quot;School&quot;: &quot;قوتابخانە&quot;, &quot;Sci-Fi&quot;: &quot;زانستی-فانتازی&quot;,
+    &quot;Seinen&quot;: &quot;سێنین&quot;, &quot;Shoujo&quot;: &quot;شۆجۆ&quot;, &quot;Shoujo Ai&quot;: &quot;شۆجۆ ئای&quot;, &quot;Shounen&quot;: &quot;شۆنین&quot;,
+    &quot;Shounen Ai&quot;: &quot;شۆنین ئای&quot;, &quot;Slice of Life&quot;: &quot;ژیانی ڕۆژانە&quot;, &quot;Space&quot;: &quot;ئاسمان&quot;,
+    &quot;Sports&quot;: &quot;وەرزشی&quot;, &quot;Super Power&quot;: &quot;هێزی سوپەر&quot;, &quot;Supernatural&quot;: &quot;نا سرووشتی&quot;,
+    &quot;Thriller&quot;: &quot;تووڕەیی&quot;, &quot;Vampire&quot;: &quot;ڤامپایەر&quot;, &quot;Isekai&quot;: &quot;ئیسیکای&quot;, &quot;Gender Bender&quot;: &quot;پەروەردەکردن&quot;,
+    &quot;Cultivation&quot;: &quot;یەک تەقە&quot;, &quot;One Shot&quot;: &quot;کارەسات&quot;, &quot;Tragedy&quot;: &quot;گەڕانەوەی كات&quot;,
+    &quot;Time Travel&quot;: &quot;وێبتوون&quot;, &quot;Webtoons&quot;: &quot;دڕندە&quot;, &quot;Monster&quot;: &quot;تاوان&quot;, &quot;Crime&quot;: &quot;تاوان&quot;,
+    &quot;Manga&quot;: &quot;مانهوا&quot;, &quot;Manhwa&quot;: &quot;مانهوای کۆری&quot;, &quot;Manhua&quot;: &quot;مانهوای چینی&quot;, &quot;Comic&quot;: &quot;کۆمیک&quot;,
+    &quot;Novel&quot;: &quot;ڕۆمان&quot;, &quot;Light Novel&quot;: &quot;ڕۆمانی ئاسان&quot;, &quot;Web Novel&quot;: &quot;ڕۆمانی وێب&quot;,
+    &quot;Manga Chapter&quot;: &quot;چاپتەر&quot;, &quot;Novel Chapter&quot;: &quot;چاپتەر&quot;, &quot;Chapter&quot;: &quot;چاپتەر&quot;,
+    &quot;Comming Soon&quot;: &quot;بەمزووانە&quot;, &quot;Ongoing&quot;: &quot;بەردەوامە&quot;, &quot;Completed&quot;: &quot;تەواو بووە&quot;,
+    &quot;Dropped&quot;: &quot;فەرامۆش کراوە&quot;, &quot;Hiatus&quot;: &quot;وەستاندراوە&quot;
+  };
+
+  function translateGenres() {
+    // ترجمة عامة لكل العناصر
+    document.querySelectorAll(&#39;a, span, li, div&#39;).forEach(el =&gt; {
+      const txt = el.textContent.trim();
+      if (genreMap[txt]) {
+        el.textContent = genreMap[txt];
+      }
+    });
+
+    // ترجمة مخصصة لعناصر imptdt (الحالة)
+    document.querySelectorAll(&#39;.imptdt&#39;).forEach(el =&gt; {
+      const txt = el.textContent.trim();
+      if (genreMap[txt]) {
+        el.textContent = genreMap[txt];
+      }
+    });
+  }
+  function translateTextNodes(node) {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const trimmed = node.textContent.trim();
+      if (genreMap[trimmed]) {
+        node.textContent = genreMap[trimmed];
+      }
+    } else {
+      node.childNodes.forEach(child =&gt; translateTextNodes(child));
+    }
+  }
+
+  function translateGenresDeep() {
+    // نطبق على كل العناصر اللي ممكن تحوي تصنيفات
+    document.querySelectorAll(&#39;a, span, li, div, .imptdt&#39;).forEach(el =&gt; {
+      translateTextNodes(el);
+    });
+  }
+
+  document.addEventListener(&quot;DOMContentLoaded&quot;, () =&gt; {
+    translateGenresDeep();
+    setTimeout(translateGenresDeep, 1000);
+  });
+
